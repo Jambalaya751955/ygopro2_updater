@@ -19,6 +19,8 @@ namespace YGOPro2_Updater
         public static string repo;
         /// <summary>Project ID</summary>
         public static string ID;
+        /// <summary>Download Filter</summary>
+        public static bool filter;
         /// <summary>下载网址</summary>
         public static string url;
 
@@ -55,6 +57,7 @@ namespace YGOPro2_Updater
                 Config.repo = repo;
             }
             ID = ConfigurationManager.AppSettings[name: $"ID{count}"];
+            filter = Convert.ToBoolean(ConfigurationManager.AppSettings[name: $"filter{count}"]);
             if (string.IsNullOrEmpty(value: ID))
                 url = $"https://raw.githubusercontent.com/{Config.name}/{Config.repo}/master/";
             else

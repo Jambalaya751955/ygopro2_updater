@@ -30,6 +30,19 @@ namespace YGOPro2_Updater
             return false;
         }
 
+        public static string DownloadFilter(string fileName)
+        {
+            if (fileName.EndsWith(value: ".cdb", comparisonType: StringComparison.OrdinalIgnoreCase))
+                fileName = $"cdb/{Path.GetFileName(path: fileName)}";
+            else if (fileName.EndsWith(value: ".conf", comparisonType: StringComparison.OrdinalIgnoreCase))
+                fileName = $"config/{Path.GetFileName(path: fileName)}";
+            else if (fileName.EndsWith(value: ".lua", comparisonType: StringComparison.OrdinalIgnoreCase))
+                fileName = $"script/{Path.GetFileName(path: fileName)}";
+            else if (fileName.EndsWith(value: "pack.db", comparisonType: StringComparison.OrdinalIgnoreCase))
+                fileName = $"pack/{Path.GetFileName(path: fileName)}";
+            return fileName;
+        }
+
         public static void SaveList(string path, ConcurrentDictionary<string, string> fileinfo)
         {
             CreateDir(path: path);

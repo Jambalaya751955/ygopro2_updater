@@ -44,10 +44,14 @@ namespace YGOPro2_Updater
                     }
                     else
                     {
+                        string fileName = ff.Key;
+                        //Check Download Filter
+                        if (Config.filter)
+                            fileName = MyUtil.DownloadFilter(fileName: ff.Key);
                         //下载文件
-                        new MyHttp().Download(url: Config.url + ff.Key, path: Config.GetPath(fileName: ff.Key));
+                        new MyHttp().Download(url: Config.url + ff.Key, path: Config.GetPath(fileName: fileName));
                         //Show the State whether Download was Success
-                        if (File.Exists(path: Config.GetPath(fileName: ff.Key)))
+                        if (File.Exists(path: Config.GetPath(fileName: fileName)))
                             Console.WriteLine(value: $"DOWNLOAD COMPLETE : {ff.Key}");
                         else if (string.IsNullOrEmpty(value: ff.Key) || string.IsNullOrEmpty(value: ff.Value))
                             Console.WriteLine(value: "DOWNLOAD FAILED");
